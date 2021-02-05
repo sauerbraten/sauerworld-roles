@@ -1,4 +1,4 @@
-# Sauerworld Roles Bot
+# Sauerworld Discord Roles Bot
 
 Listens for reactions on specific messages and toggles roles on the reacting users.
 

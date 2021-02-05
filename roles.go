@@ -14,6 +14,7 @@ func toggleRole(s *discordgo.Session, mr *discordgo.MessageReaction, on bool) {
 	// check what role should be toggled
 	role, ok := config.RolesByMessageID[mr.MessageID]
 	if !ok {
+		// not a message we're watching
 		return
 	}
 

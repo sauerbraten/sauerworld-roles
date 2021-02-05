@@ -33,7 +33,7 @@ func main() {
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 	<-sc
-	log.Println("received interrupt, sutting down")
+	log.Println("received interrupt, shutting down")
 
 	err = session.Close()
 	if err != nil {
