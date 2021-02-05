@@ -10,7 +10,7 @@ Listens for reactions on specific messages and toggles roles on the reacting use
 
 Configuration is done via environment variables:
 
-- `TOKEN`: Discord bot token
+- `DISCORD_TOKEN`: Discord bot token (https://discord.com/developers/applications/807225697789673502/bot)
 - `ROLES_BY_MESSAGE_ID`: list of pairs of a message ID and a role name each, for example: `ROLES_BY_MESSAGE_ID=492453791002525697=duel,492453832035532800=mix`
 
 Role names are resolved to role IDs via the Discord API and then cached.
