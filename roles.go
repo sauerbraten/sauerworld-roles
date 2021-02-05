@@ -43,7 +43,7 @@ func toggleRole(s *discordgo.Session, mr *discordgo.MessageReaction, on bool) {
 
 	memberName := fmt.Sprintf("%s#%s [%s]", member.User.Username, member.User.Discriminator, member.User.ID)
 	if member.Nick != "" {
-		memberName = fmt.Sprintf("%s (%s)", member.Nick, memberName)
+		memberName = fmt.Sprintf("%s (%s#%s) [%s]", member.Nick, member.User.Username, member.User.Discriminator, member.User.ID)
 	}
 
 	if on {
