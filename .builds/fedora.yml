@@ -1,0 +1,22 @@
+image: fedora/32
+packages:
+  - go
+  - rsync
+sources:
+  - https://github.com/sauerbraten/sauerworld-roles
+environment:
+  DEPLOY: p1x.pw
+  GOFLAGS: "-mod=vendor"
+secrets:
+  - 956ddc04-c911-4147-bc90-30bb08276c3e # ci@p1x.pw ssh key
+  - 4e8f9d2d-5a9e-4346-b281-39f956495ed7 # ~/.sw-roles_discord_token
+tasks:
+  - build: |
+      cd sauerworld-roles
+      go build
+  - deploy: |
+      cd sauerworld-roles
+      if [[ $GITHUB_REF != "refs/heads/main" ]]; then exit 0; fi # only deploy main branch
+      ssh -o StrictHostKeyChecking=no ci@$DEPLOY 'mkdir -p ~/sauerworld-roles'
+      rsync --rsh="ssh -o StrictHostKeyChecking=no" -rPq sauerworld-roles .env ~/.sw-roles_discord_token ci@$DEPLOY:~/sauerworld-roles/
+      ssh -o StrictHostKeyChecking=no ci@$DEPLOY 'cd sauerworld-roles; echo DISCORD_TOKEN=$(cat .sw-roles_discord_token) >> .env; sudo systemctl restart sauerworld-roles'
