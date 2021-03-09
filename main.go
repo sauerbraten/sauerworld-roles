@@ -17,6 +17,12 @@ func main() {
 		log.Fatalf("error creating Discord session: %v\n", err)
 	}
 
+	session.AddHandler(func(_ *discordgo.Session, _ *discordgo.Connect) {
+		log.Println("connected to Discord")
+	})
+	session.AddHandler(func(_ *discordgo.Session, _ *discordgo.Disconnect) {
+		log.Println("disconnected from Discord")
+	})
 	session.AddHandler(messageReactionAdded)
 	session.AddHandler(messageReactionRemoved)
 
@@ -26,8 +32,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("error opening connection: %v\n", err)
 	}
-
-	log.Println("connected to Discord")
 
 	// wait for kill signal
 	sc := make(chan os.Signal, 1)
