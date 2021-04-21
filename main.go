@@ -30,7 +30,7 @@ func main() {
 
 	err = session.Open()
 	if err != nil {
-		log.Fatalf("error opening connection: %v\n", err)
+		log.Fatalf("error opening Discord session: %v\n", err)
 	}
 
 	// wait for kill signal
@@ -41,7 +41,7 @@ func main() {
 
 	err = session.Close()
 	if err != nil {
-		log.Printf("error closing connection: %v\n", err)
+		log.Printf("error closing Discord session: %v\n", err)
 	}
 }
 
